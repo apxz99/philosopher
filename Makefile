@@ -6,7 +6,7 @@
 #    By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/09 18:38:14 by sarayapa          #+#    #+#              #
-#    Updated: 2026/04/10 11:15:12 by sarayapa         ###   ########.fr        #
+#    Updated: 2026/06/05 09:46:59 by sarayapa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FILES = philo_main.c philo_parser.c philo_utils.c philo_activities.c
 
 SRCS = src/
 BUILD = build/
-INC = -Iinclude -Ilibft/include
+INC = -Iinclude
 
 SRCS_O = $(addprefix $(BUILD), $(FILES:.c=.o))
 
@@ -27,7 +27,7 @@ GREEN = \033[1;32m
 YELLOW = \033[1;33m
 RED = \033[1;31m
 BLUE = \033[1;34m
-WHITE = \033[1mlibmlx
+WHITE = \033[1m
 RESET = \033[0m
 
 all: $(BUILD) $(NAME)
@@ -56,7 +56,6 @@ clean:
 
 fclean: clean
 	@echo "$(RED)Removed $(NAME)!$(RESET)"
-	@make -s fclean -C libft
 	@rm -f $(NAME)
 
 re: fclean all

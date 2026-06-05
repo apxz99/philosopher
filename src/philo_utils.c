@@ -6,62 +6,77 @@
 /*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 20:12:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/04/10 12:21:24 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/05 13:37:49 by sarayapa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_isdigit(int c)
+void	error_exit(void)
 {
-	return ((c >= '0') && (c <= '9'));
+	write(2, "invalid data\n", 13);
 }
 
-int	ft_atoi(const char *n)
+int	ft_atoi(char *str)
 {
-	int		neg;
-	long	i;
-	int		res;
+	int	i;
+	int	res;
+	int	sign;
 
 	i = 0;
 	res = 0;
-	neg = 1;
-	while (n[i] == ' ' || (n[i] >= '\t' && n[i] <= '\r'))
+	sign = 1;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
 		i++;
-	if (n[i] == '-' || n[i] == '+')
-		neg = ',' - n[i++];
-	while (ft_isdigit(n[i]) && n[i])
+	if (str[i] == '-' || str[i] == '+')
 	{
-		res = (res * 10) + (n[i] - '0');
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	return (res * neg);
-}
-
-long    get_time_ms(void)
-{
-    struct timeval  tv;
-
-    gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
-}
-
-int is_philo_dead_eat(t_philo *philo)
-{
-	if(get_time_ms() - philo->last_time >= philo->time_to_dead)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		philo->data->is_dead = 1;
-		printf("%d is dead.\n", philo->id);
-		return (1);
+		res = res * 10 + (str[i] - 48);
+		i++;
 	}
-	return (0);
+	return (res * sign);
 }
 
-void	ms_sleep(long time_ms)
+void	*ft_calloc(size_t count, size_t size)
 {
-	long	start_time;
+	unsigned char	*tmp;
+	size_t	i;
 
-	start_time = get_time_ms();
-	while(get_time_ms() - start_time < time_ms )
-		usleep(500);
+	i = 0;
+	tmp = malloc(count * size);
+	if (!tmp)
+		return (NULL);
+	while (i < count * size)
+		tmp[i++] = 0;
+	return(0);
+}
+
+size_t	get_time_ms(void)
+{
+	struct  timeval time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		write(2, "gettimeofday() error\n", 22);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+int	is_valid_cal(char *str)
+	{
+	int i;
+
+	i = 0;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
