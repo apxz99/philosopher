@@ -6,7 +6,7 @@
 /*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 20:12:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/05 13:37:49 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/06 21:04:36 by sarayapa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	ft_atoi(char *str)
 
 void	*ft_calloc(size_t count, size_t size)
 {
+	size_t			i;
 	unsigned char	*tmp;
-	size_t	i;
 
 	i = 0;
 	tmp = malloc(count * size);
@@ -53,21 +53,33 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	while (i < count * size)
 		tmp[i++] = 0;
-	return(0);
+	return (0);
 }
 
-size_t	get_time_ms(void)
+size_t	get_current_time(void)
 {
-	struct  timeval time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
+int	ft_usleep(size_t	milliseconds)
+{
+	int	error;
+	size_t	start;
+
+	error = 0;
+	start = get_current_time();
+	while(get_current_time() - start < milliseconds && error == 0)
+		error = usleep(10000);
+	return (error);
+}
+
 int	is_valid_cal(char *str)
 	{
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str[i])

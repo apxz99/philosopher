@@ -6,7 +6,7 @@
 /*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:33:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/05 13:35:28 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/06 19:41:03 by sarayapa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	parse_args(int ac, char **av)
 {
-	int i;
+	int	i;
 
 	if (ac != 5 && ac != 6)
 		return (1);
 	i = 1;
-	while(i < ac)
+	while (i < ac)
 	{
-		if(!is_valid_cal(av[i]))
+		if (!is_valid_cal(av[i]))
 			return (1);
 		i++;
 	}
@@ -47,9 +47,9 @@ int	init_forks(t_main *main, int n)
 	return (0);
 }
 
-void    init_philos(t_main *main, int n, int ac, char **av)
+void	init_philos(t_main *main, int n, int ac, char **av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
