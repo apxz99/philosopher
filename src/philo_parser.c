@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: asuya <asuya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 18:33:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/06 19:41:03 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/07 10:32:28 by asuya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int	init_forks(t_main *main, int n)
 	i = 0;
 	while (i < n)
 	{
-		pthread_mutex_init(&main->forks[i], NULL);
+		if(pthread_mutex_init(&main->forks[i], NULL) != 0)
+		{
+			//pthread_mutex_destroy(&main->forks[i]);
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -64,8 +68,8 @@ void	init_philos(t_main *main, int n, int ac, char **av)
 		main->philos[i].num_times_to_eat = -1;
 		if (ac == 6)
 			main->philos[i].num_times_to_eat = ft_atoi(av[5]);
-		main->philos[i].start_time = get_time_ms();
-		main->philos[i].last_meal = get_time_ms();
+		main->philos[i].start_time = get_current_time();
+		main->philos[i].last_meal = get_current_time();
 		main->philos[i].dead = &main->dead_flag;
 		main->philos[i].dead_lock = &main->dead_lock;
 		main->philos[i].meal_lock = &main->meal_lock;
@@ -83,7 +87,7 @@ int	init_data(t_main *main, int ac, char **av)
 	main->dead_flag = 0;
 	pthread_mutex_init(&main->dead_lock, NULL);
 	pthread_mutex_init(&main->meal_lock, NULL);
-	main->philos = malloc(sizeof(t_philo) * n);
+	main->philos = ft_calloc(sizeof(t_philo), n);
 	if (!main->philos)
 		return (1);
 	if (init_forks(main, n))

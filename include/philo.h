@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: asuya <asuya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 14:07:39 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/06 22:30:51 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/07 10:32:02 by asuya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_main
 int		init_data(t_main *main, int ac, char **av);
 int		ft_atoi(char *str);
 void	*ft_calloc(size_t count, size_t size);
-size_t	get_time_ms(void);
+size_t	get_current_time(void);
 int		is_valid_cal(char *str);
 int		parse_args(int ac, char **av);
 

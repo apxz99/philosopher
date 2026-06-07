@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: asuya <asuya@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 20:12:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/06 21:04:36 by sarayapa         ###   ########.fr       */
+/*   Updated: 2026/06/07 10:30:53 by asuya            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void	error_exit(void)
-{
-	write(2, "invalid data\n", 13);
-}
 
 int	ft_atoi(char *str)
 {
@@ -53,7 +48,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	while (i < count * size)
 		tmp[i++] = 0;
-	return (0);
+	return (tmp);
 }
 
 size_t	get_current_time(void)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: asuya <asuya@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/09 18:38:14 by sarayapa          #+#    #+#              #
-#    Updated: 2026/06/05 09:46:59 by sarayapa         ###   ########.fr        #
+#    Updated: 2026/06/07 10:28:55 by asuya            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,26 +36,26 @@ $(BUILD):
 	@mkdir -p $(BUILD)
 
 $(BUILD)%.o: $(SRCS)%.c
-	@echo "$(YELLOW)Compiling file...$(RESET)"
+	@echo -e "$(YELLOW)Compiling file...$(RESET)"
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(SRCS_O)
-	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
+	@echo -e "$(YELLOW)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $^ -o $@
-	@echo "$(GREEN)✔ $(NAME) ready Location: $(BLUE)$$(pwd)/$(YELLOW)$(NAME)$(RESET)"
+	@echo -e "$(GREEN)✔ $(NAME) ready Location: $(BLUE)$$(pwd)/$(YELLOW)$(NAME)$(RESET)"
 
 norm:
-	@echo "========= INCLUDES =========="
+	@echo -e "========= INCLUDES =========="
 	@norminette ./include
-	@echo "========= SOURCES ==========="
+	@echo -e "========= SOURCES ==========="
 	@norminette $(SRCS)
 
 clean:
 	@rm -rf $(BUILD)
-	@echo "$(RED)Cleaned objects!$(RESET)"
+	@echo -e "$(RED)Cleaned objects!$(RESET)"
 
 fclean: clean
-	@echo "$(RED)Removed $(NAME)!$(RESET)"
+	@echo -e "$(RED)Removed $(NAME)!$(RESET)"
 	@rm -f $(NAME)
 
 re: fclean all
