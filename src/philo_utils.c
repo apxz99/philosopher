@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: asuya <asuya@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/09 20:12:32 by sarayapa          #+#    #+#             */
-/*   Updated: 2026/06/07 10:30:53 by asuya            ###   ########.fr       */
+/*   Updated: 2026/06/07 19:11:29 by sarayapa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,22 @@ size_t	get_current_time(void)
 
 int	ft_usleep(size_t	milliseconds)
 {
-	int	error;
+	int		error;
 	size_t	start;
 
 	error = 0;
 	start = get_current_time();
-	while(get_current_time() - start < milliseconds && error == 0)
+	while (get_current_time() - start < milliseconds && error == 0)
 		error = usleep(10000);
 	return (error);
 }
 
-int	is_valid_cal(char *str)
-	{
-	int	i;
+void	safe_print(char *msg, t_philo *philo)
+{
+	size_t	now;
 
-	i = 0;
-	if (!str[i])
-		return (0);
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+	now = get_current_time();
+	pthread_mutex_lock(&philo->data->print_lock);
+	printf("%ld %d %s\n", now - philo->start_time, philo->id, msg);
+	pthread_mutex_unlock(&philo->data->print_lock);
 }

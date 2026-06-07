@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: asuya <asuya@student.42.fr>                +#+  +:+       +#+         #
+#    By: sarayapa <sarayapa@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/09 18:38:14 by sarayapa          #+#    #+#              #
-#    Updated: 2026/06/07 10:28:55 by asuya            ###   ########.fr        #
+#    Updated: 2026/06/07 18:11:35 by sarayapa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-FILES = philo_main.c philo_parser.c philo_utils.c philo_activities.c
+FILES = philo_main.c philo_parser.c philo_utils.c philo_activities.c philo_checking.c
 
 SRCS = src/
 BUILD = build/
@@ -36,26 +36,26 @@ $(BUILD):
 	@mkdir -p $(BUILD)
 
 $(BUILD)%.o: $(SRCS)%.c
-	@echo -e "$(YELLOW)Compiling file...$(RESET)"
+	@echo "$(YELLOW)Compiling file...$(RESET)"
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(SRCS_O)
-	@echo -e "$(YELLOW)Linking $(NAME)...$(RESET)"
+	@echo "$(YELLOW)Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $^ -o $@
-	@echo -e "$(GREEN)✔ $(NAME) ready Location: $(BLUE)$$(pwd)/$(YELLOW)$(NAME)$(RESET)"
+	@echo "$(GREEN)✔ $(NAME) ready Location: $(BLUE)$$(pwd)/$(YELLOW)$(NAME)$(RESET)"
 
 norm:
-	@echo -e "========= INCLUDES =========="
+	@echo "========= INCLUDES =========="
 	@norminette ./include
-	@echo -e "========= SOURCES ==========="
+	@echo "========= SOURCES ==========="
 	@norminette $(SRCS)
 
 clean:
 	@rm -rf $(BUILD)
-	@echo -e "$(RED)Cleaned objects!$(RESET)"
+	@echo "$(RED)Cleaned objects!$(RESET)"
 
 fclean: clean
-	@echo -e "$(RED)Removed $(NAME)!$(RESET)"
+	@echo "$(RED)Removed $(NAME)!$(RESET)"
 	@rm -f $(NAME)
 
 re: fclean all
